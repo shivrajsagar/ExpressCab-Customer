@@ -3,8 +3,8 @@ import { TouchableWithoutFeedback, ScrollView, StyleSheet } from "react-native";
 import { Block, Text, theme } from "galio-framework";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-import { Drawer as DrawerCustomItem } from "../components/";
-import { materialTheme } from "../constants/";
+import { Drawer as DrawerCustomItem } from "../components";
+import { materialTheme } from "../constants";
 
 function CustomDrawerContent({ drawerPosition, navigation, profile, focused, state, ...rest }) {
   const insets = useSafeAreaInsets();
