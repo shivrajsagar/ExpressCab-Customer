@@ -1,44 +1,20 @@
 import React from "react";
-import {
-  TouchableWithoutFeedback,
-  ScrollView,
-  StyleSheet,
-} from "react-native";
+import { TouchableWithoutFeedback, ScrollView, StyleSheet } from "react-native";
 import { Block, Text, theme } from "galio-framework";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { Drawer as DrawerCustomItem } from "../components/";
 import { materialTheme } from "../constants/";
 
-function CustomDrawerContent({
-  drawerPosition,
-  navigation,
-  profile,
-  focused,
-  state,
-  ...rest
-}) {
+function CustomDrawerContent({ drawerPosition, navigation, profile, focused, state, ...rest }) {
   const insets = useSafeAreaInsets();
-  const screens = [
-    "Home",
-    "Profile",
-    "My rides",
-    "Routes",
-    "Fare",
-    "About us",
-    "Help",
-  ];
+  const screens = ["Home", "Profile", "My Rides", "Routes", "Fare", "About us", "Help"];
   return (
-    <Block
-      style={styles.container}
-      forceInset={{ top: "always", horizontal: "never" }}
-    >
+    <Block style={styles.container} forceInset={{ top: "always", horizontal: "never" }}>
       <Block flex={0.25} style={styles.header}>
-        <TouchableWithoutFeedback
-          onPress={() => navigation.navigate("Profile")}
-        >
+        <TouchableWithoutFeedback onPress={() => navigation.navigate("Profile")}>
           <Block style={styles.profile}>
-            <Text h5 color={"white"}>
+            <Text h6 color={"white"}>
               {profile.name}
             </Text>
           </Block>

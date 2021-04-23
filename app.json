@@ -24,7 +24,10 @@
         "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#24313e"
       },
-      "package": "Express.com"
+      "permissions":[],
+      "package": "Express.com",
+      "versionCode":1
+
     },
     "web": {
       "favicon": "./assets/favicon.png"

@@ -14,6 +14,7 @@ enableScreens();
 
 import { Provider } from "react-redux";
 import store from "./redux/store";
+import CustomHome from "./screens/CustomHome";
 
 export default class App extends Component {
   state = {
@@ -28,6 +29,7 @@ export default class App extends Component {
             <Block flex>
               {Platform.OS === "ios" && <StatusBar barStyle="default" />}
               <Screens />
+              {/* <CustomHome /> */}
             </Block>
           </GalioProvider>
         </NavigationContainer>

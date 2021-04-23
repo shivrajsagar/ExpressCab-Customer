@@ -78,7 +78,6 @@ class Login extends React.Component {
               <Button
                 color={materialTheme.COLORS.BUTTON_COLOR}
                 onPress={this.onSubmit}
-                loading={loading}
               >
                 Login
               </Button>

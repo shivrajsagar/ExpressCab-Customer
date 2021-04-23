@@ -34,8 +34,8 @@ class Contact extends Component {
         <Block flex center style={styles.container}>
           <Text h5>Contact Us</Text>
           <Text center>
-            Lorem Ipsum passages, and more recently with desktop publishing software like aldus
-            pageMaker including versions of all the Lorem Ipsum generators
+            Lorem Ipsum passages, and more recently with desktop publishing software like aldus pageMaker including
+            versions of all the Lorem Ipsum generators
           </Text>
           <Block style={styles.input}>
             {errorMessage ? (
@@ -85,19 +85,19 @@ class Contact extends Component {
             </TouchableOpacity>
           </Block>
           <Block style={styles.card}>
-            <Block middle style={styles.space}>
+            <Block row style={styles.space}>
               <Icon name="location" family="Entypo" size={25} />
-              <Text>Primecabs, Delhi, India</Text>
+              <Text style={styles.textStyle}>
+                Office No.- S.F.22, 3rd Floor,{"\n"}Anaya Business Centre, Near D-Mart,{"\n"}Althan, Surat-395007{" "}
+              </Text>
             </Block>
-            <Block middle style={styles.space}>
+            <Block row style={styles.space}>
               <Icon name="phone" family="Entypo" size={25} />
-              <Text>+1 234 567 7890 </Text>
-              <Text> +1 234 567 7892</Text>
+              <Text style={styles.textStyle}>+91 93766 65567</Text>
             </Block>
-            <Block middle style={styles.space}>
+            <Block row style={styles.space}>
               <Icon name="email" family="Entypo" size={25} />
-              <Text>support@primecabs.com</Text>
-              <Text>info@primecabs.com</Text>
+              <Text style={styles.textStyle}>Info@expresscab.in{"\n"}Corporate@expresscab.in</Text>
             </Block>
           </Block>
         </Block>
@@ -115,8 +115,6 @@ const styles = StyleSheet.create({
   },
   card: {
     backgroundColor: "#fafafa",
-    justifyContent: "center",
-    alignItems: "center",
     width: width - materialTheme.SIZES.BASE * 3,
     padding: 10,
     margin: 10,
@@ -131,6 +129,9 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     justifyContent: "center",
     marginTop: 10,
+  },
+  textStyle: {
+    marginLeft: 8,
   },
 });
 

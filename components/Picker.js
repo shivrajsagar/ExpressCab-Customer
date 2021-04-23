@@ -15,9 +15,7 @@ export default class PickerComponent extends Component {
         <Picker
           selectedValue={this.state.city}
           style={{ height: 50, width: 100 }}
-          onValueChange={(itemValue, itemIndex) =>
-            this.setState({ city: itemValue })
-          }
+          onValueChange={(itemValue, itemIndex) => this.setState({ city: itemValue })}
           enabled={false}
         >
           <Picker.Item label="Noida" value="Noida" />

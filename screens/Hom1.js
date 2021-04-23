@@ -13,30 +13,27 @@ import CitySearch from "../components/CitySearch";
 
 //const { DATA } = data;
 
-class Home extends Component {
+class Home1 extends Component {
   componentDidMount = () => {
     this.props.fetchCity();
-  };
-
-  componentDidUpdate() {
     this.props.fetchprice();
-  }
-
-  renderSearch = () => {
-    const { navigation, item } = this.props;
-    return (
-      <>
-        <StateSearch item={item} navigation={navigation} />
-        <CitySearch item={item} navigation={navigation} />
-      </>
-    );
   };
 
-  renderItem = ({ item }) => {
-    const { navigation } = this.props;
-    console.log(item);
-    return <City item={item} navigation={navigation} />;
-  };
+  // renderSearch = () => {
+  //   const { navigation, item } = this.props;
+  //   return (
+  //     <>
+  //       <StateSearch item={item} navigation={navigation} />
+  //       <CitySearch item={item} navigation={navigation} />
+  //     </>
+  //   );
+  // };
+
+  // renderItem = ({ item }) => {
+  //   const { navigation } = this.props;
+  //   console.log(item);
+  //   return <City item={item} navigation={navigation} />;
+  // };
 
   render() {
     const { data, loading, item, navigation } = this.props;
@@ -105,4 +102,4 @@ const mapStateToProps = (state) => ({
   data: state.place.data,
 });
 
-export default connect(mapStateToProps, { fetchCity, fetchprice })(Home);
+export default connect(mapStateToProps, { fetchCity, fetchprice })(Home1);

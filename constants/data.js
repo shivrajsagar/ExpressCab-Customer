@@ -100,20 +100,6 @@ const CARLIST = [
     passenger: 4,
     luggage: 5,
   },
-  {
-    id: 8,
-    image: require("../assets/images/car3.png"),
-    carname: "Wagon",
-    passenger: 4,
-    luggage: 5,
-  },
-  {
-    id: 9,
-    image: require("../assets/images/car4.png"),
-    carname: "Wagon",
-    passenger: 4,
-    luggage: 5,
-  },
 ];
 
 const ROUTES = [

@@ -13,7 +13,7 @@ class DrawerItem extends React.Component {
         return <Icon size={22} name="home" family="entypo" color={focused ? "white" : materialTheme.COLORS.MUTED} />;
       case "Profile":
         return <Icon size={22} name="man" family="entypo" color={focused ? "white" : materialTheme.COLORS.MUTED} />;
-      case "My rides":
+      case "My Rides":
         return (
           <Icon size={22} name="linechart" family="AntDesign" color={focused ? "white" : materialTheme.COLORS.MUTED} />
         );

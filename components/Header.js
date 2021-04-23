@@ -45,7 +45,7 @@ class Header extends React.Component {
         return [<SupportButton key="basket-categories" navigation={navigation} isWhite={white} />];
       case "Book a cab":
         return [<SupportButton key="basket-categories" navigation={navigation} isWhite={white} />];
-      case "My rides":
+      case "Myrides":
         return [<SupportButton key="basket-categories" navigation={navigation} isWhite={white} />];
       case "Profile":
         return [<SupportButton key="basket-deals" navigation={navigation} isWhite={white} />];
@@ -104,7 +104,6 @@ class Header extends React.Component {
         <NavBar
           back={back}
           title={title}
-          
           style={styles.navbar}
           transparent={transparent}
           left={
@@ -117,7 +116,7 @@ class Header extends React.Component {
           leftStyle={{ flex: 0.3, paddingTop: 2 }}
           //leftIconName={back ? "chevron-left" : "navicon"}
           leftIconColor={white ? theme.COLORS.WHITE : theme.COLORS.ICON}
-          titleStyle={[styles.title, { color:"white" }]}
+          titleStyle={[styles.title, { color: "white" }]}
           onLeftPress={this.handleLeftPress}
         />
         {this.renderHeader()}

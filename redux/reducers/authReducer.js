@@ -22,12 +22,11 @@ const INITIAL_STATE = {
 };
 
 export default (state = INITIAL_STATE, action) => {
-  console.log(action.type);
   switch (action.type) {
     case LOADING:
       return { ...state, loading: true };
     case LOGIN_USER:
-      return { ...state, [action.payload.prop]: action.payload.value ,};
+      return { ...state, [action.payload.prop]: action.payload.value };
     case LOGIN_ERROR:
       return { ...state, loading: false, error: action.payload };
     case LOGIN_SUCCESS:

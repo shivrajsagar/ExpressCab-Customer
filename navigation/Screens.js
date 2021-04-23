@@ -2,6 +2,8 @@ import React from "react";
 import { Easing, Animated, Dimensions } from "react-native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+
 import { NavigationContainer, StackActions } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 //components
@@ -22,13 +24,21 @@ import Routes from "../screens/Routes";
 import Fare from "../screens/Fare";
 import About from "../screens/About";
 import Help from "../screens/Help";
+import Booking1 from "../screens/Booking/Booking1";
+import Booking2 from "../screens/Booking/Booking2";
+import Myrides from "../screens/Myrides";
+import Carlist from "../screens/Carlist";
+import Upcoming from "../screens/Upcoming";
+import Completed from "../screens/Completed";
+import CustomHome from "../screens/CustomHome";
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 const Bottom = createBottomTabNavigator();
+const Tab = createMaterialTopTabNavigator();
 
 const profile = {
-  name: "User",
+  name: "Profile",
 };
 
 //dimensiomns
@@ -135,10 +145,43 @@ function RouteStack(params) {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="Profile"
+        name="Routes"
         component={Routes}
         options={{
           header: ({ navigation, scene }) => <Header tabs title="Routes" navigation={navigation} scene={scene} />,
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
+function TopStack(params) {
+  return (
+    <Tab.Navigator
+      mode="card"
+      headerMode="screen"
+      initialRouteName="Upcoming"
+      tabBarOptions={{
+        activeTintColor: materialTheme.COLORS.BUTTON_COLOR,
+        inactiveTintColor: "white",
+        style: {
+          backgroundColor: "#2B3856",
+        },
+      }}
+    >
+      <Tab.Screen name="Upcoming" component={Upcoming} options={{ tabBarLabel: "UPCOMING" }} />
+      <Tab.Screen name="Completed" component={Completed} options={{ tabBarLabel: "COMPLETED" }} />
+    </Tab.Navigator>
+  );
+}
+
+function MyridesStack(params) {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="My Rides"
+        component={TopStack}
+        options={{
+          header: ({ navigation, scene }) => <Header tabs title="My Rides" navigation={navigation} scene={scene} />,
         }}
       />
     </Stack.Navigator>
@@ -167,6 +210,19 @@ function AboutStack(params) {
         component={About}
         options={{
           header: ({ navigation, scene }) => <Header tabs title="About us" navigation={navigation} scene={scene} />,
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
+function BookingStack(params) {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Booking"
+        component={Booking1}
+        options={{
+          header: ({ navigation, scene }) => <Header tabs title="Booking" navigation={navigation} scene={scene} />,
         }}
       />
     </Stack.Navigator>
@@ -219,8 +275,14 @@ function AppStack(props) {
           drawerIcon: ({ focused }) => <Icon name="cab" family="GalioExtra" color={focused} />,
         }}
       />
-      <Drawer.Screen name="Profile" component={ProfileStack} />
-      <Drawer.Screen name="Myrides" component={ProfileStack} />
+      <Drawer.Screen
+        name="Profile"
+        component={ProfileStack}
+        options={{
+          drawerIcon: ({ focused }) => <Icon name="cab" family="GalioExtra" color={focused} />,
+        }}
+      />
+      <Drawer.Screen name="My Rides" component={MyridesStack} />
       <Drawer.Screen name="Routes" component={RouteStack} />
       <Drawer.Screen name="Fare" component={FareStack} />
       <Drawer.Screen name="About us" component={AboutStack} />
@@ -244,6 +306,9 @@ export default function OnboardingStack(props) {
       <Stack.Screen name="Onboarding" component={Onboarding} options={{ headerTransparent: true }} />
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="App" component={AppStack} />
+      <Stack.Screen name="Car List" component={Carlist} />
+      <Stack.Screen name="Booking" component={BookingStack} />
+      <Stack.Screen name="Booking2" component={Booking2} />
     </Stack.Navigator>
   );
 }
