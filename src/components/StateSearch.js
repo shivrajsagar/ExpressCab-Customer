@@ -1,25 +1,33 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { materialTheme } from "../constants";
 import { Input, theme } from "galio-framework";
-import { SafeAreaView, Text, StyleSheet, View, FlatList, Dimensions } from "react-native";
-import { fetchCity } from "../redux/actions/placeAction";
+import {
+  SafeAreaView,
+  Text,
+  StyleSheet,
+  View,
+  FlatList,
+  Dimensions,
+} from "react-native";
+import { fetchState, cityidUpdate } from "../redux/actions/placeAction";
 import { connect } from "react-redux";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 const { width } = Dimensions.get("screen");
 
-const StateSearch = ({ navigation, data }) => {
+const StateSearch = ({ navigation, data, cityid, cityidUpdate }) => {
   const [search, setSearch] = useState("Ahmedabad");
   const [show, setShow] = useState(false);
   const [filteredDataSource, setFilteredDataSource] = useState([]);
   const [masterDataSource, setMasterDataSource] = useState([]);
 
-  // console.log(selectedID);
-
   const searchFilterFunction = (text) => {
     if (text) {
       const newData = masterDataSource.filter(function (item) {
-        const itemData = item.city_name && item.city_id ? item.city_name.toUpperCase() : "".toUpperCase();
+        const itemData =
+          item.city_name && item.city_id
+            ? item.city_name.toUpperCase()
+            : "".toUpperCase();
         const textData = text.toUpperCase();
         return itemData.indexOf(textData) > -1;
       });
@@ -36,7 +44,13 @@ const StateSearch = ({ navigation, data }) => {
   const ItemView = ({ item }) => {
     const { navigate } = navigation;
     return (
-      <TouchableOpacity onPress={() => [(setShow(false), getItem(item))]}>
+      <TouchableOpacity
+        onPress={() => [
+          setShow(false),
+          getItem(item),
+          cityidUpdate(item.city_id),
+        ]}
+      >
         <Text style={styles.itemStyle}>
           {item.city_name} {item.state_name}
         </Text>
@@ -57,9 +71,10 @@ const StateSearch = ({ navigation, data }) => {
   };
 
   const getItem = (item) => {
+    global.FROMCITY = item.city_name;
     return (
       <View>
-        <Text>{setSearch(cityData + " " + stateData)}</Text>
+        <Text>{setSearch(item.city_name + " " + item.state_name)}</Text>
       </View>
     );
   };
@@ -90,7 +105,11 @@ const StateSearch = ({ navigation, data }) => {
         {search
           ? show && (
               <FlatList
-                data={filteredDataSource && filteredDataSource.length > 0 ? filteredDataSource : data}
+                data={
+                  filteredDataSource && filteredDataSource.length > 0
+                    ? filteredDataSource
+                    : data
+                }
                 keyExtractor={(item, index) => index.toString()}
                 ItemSeparatorComponent={ItemSeparatorView}
                 renderItem={ItemView}
@@ -120,7 +139,10 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => ({
   loading: state.place.loading,
-  data: state.place.city,
+  data: state.place.statedata,
+  cityid: state.place.cityid,
 });
 
-export default connect(mapStateToProps, { fetchCity })(StateSearch);
+export default connect(mapStateToProps, { fetchState, cityidUpdate })(
+  StateSearch
+);

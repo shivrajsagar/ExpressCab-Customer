@@ -12,8 +12,12 @@ export const REGISTER_SUCCESS = "register_success";
 
 export const REFRESH_MESSAGE = "refresh_message";
 
+export const CITY_ID = "city_id";
 export const FETCH_CITY = "fetch_city";
+export const FETCH_STATE = "fetch_state";
 export const CAR_LIST = "car_list";
+export const MESSAGE = "message";
+
 //booking
 export const BOOKING = "booking";
 export const BOOKING_ERROR = "booking_error";

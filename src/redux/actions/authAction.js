@@ -80,7 +80,10 @@ export const loginUser = ({ mobile, password }) => async (dispatch) => {
       ? loginFail(dispatch, response.data.message)
       : [
           loginSuccess(dispatch, response.data.message),
-          await AsyncStorage.setItem("user", JSON.stringify(response.data.user)),
+          await AsyncStorage.setItem(
+            "user",
+            JSON.stringify(response.data.user)
+          ),
           RootNavigation.navigate("App"),
         ];
   } catch (e) {
@@ -88,9 +91,14 @@ export const loginUser = ({ mobile, password }) => async (dispatch) => {
   }
 };
 
-export const registerUser = ({ name, mobile, email, address, aadhar, password }) => async (
-  dispatch
-) => {
+export const registerUser = ({
+  name,
+  mobile,
+  email,
+  address,
+  aadhar,
+  password,
+}) => async (dispatch) => {
   try {
     dispatch({ type: LOADING });
     var formdata = new FormData();

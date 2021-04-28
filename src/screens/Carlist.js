@@ -1,27 +1,36 @@
 import React, { Component } from "react";
-import { Dimensions, StyleSheet, FlatList, Image, ScrollView, TouchableOpacity } from "react-native";
+import {
+  Dimensions,
+  StyleSheet,
+  FlatList,
+  Image,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
 import { Block, Icon, Text } from "galio-framework";
-
 import { materialTheme } from "../constants";
-
 import { connect } from "react-redux";
-import { CarDetail } from "../redux/actions/carAction";
+import { carList } from "../redux/actions/placeAction";
 
-const { width, height } = Dimensions.get("screen");
+const { width } = Dimensions.get("screen");
 
 class Carlist extends Component {
   componentDidMount = () => {
-    this.props.CarDetail();
+    this.props.carList();
   };
   renderItem = ({ item }) => {
     const { navigation } = this.props;
-    const { cityname, TOcityID, FromData, statename, fare } = this.props.route.params;
+    const { cityname, Fromcity, fare } = this.props.route.params;
     return (
       <Block card style={styles.card}>
         {item.car_id ? (
           <>
             <Block middle style={styles.imageContainer}>
-              <Image source={{ uri: item.car_image }} resizeMode={"contain"} style={{ height: 200, width: 200 }} />
+              <Image
+                source={{ uri: item.car_image }}
+                resizeMode={"contain"}
+                style={{ height: 200, width: 200 }}
+              />
             </Block>
             <Text size={24}>{item.car_name}</Text>
             <Block row>
@@ -30,7 +39,12 @@ class Carlist extends Component {
                 <Text size={16}>4 Passengers</Text>
               </Block>
               <Block flex row space="evenly">
-                <Icon name="shopping-bag" family="Entypo" size={16} color="gray" />
+                <Icon
+                  name="shopping-bag"
+                  family="Entypo"
+                  size={16}
+                  color="gray"
+                />
                 <Text size={16}>2 Luggage</Text>
               </Block>
             </Block>
@@ -43,7 +57,7 @@ class Carlist extends Component {
               car_name: item.car_name,
               car_id1: item.car_id,
               cityname: cityname,
-              fromCity: FromData,
+              fromCity: Fromcity,
               fare: fare,
             })
           }
@@ -60,16 +74,20 @@ class Carlist extends Component {
   };
   render() {
     const { renderItem } = this;
-    const { data, loading } = this.props;
-    const { cityname, TOcityID, FromData, statename, fare } = this.props.route.params;
+    const { carlist } = this.props;
+    const { cityname, Fromcity } = this.props.route.params;
 
     return (
       <ScrollView>
         <Block safe style={styles.container}>
           <Text center h5 color="white">
-            {FromData} To {cityname}
+            {Fromcity} To {cityname}
           </Text>
-          <FlatList data={data} renderItem={renderItem} keyExtractor={(item, index) => "key" + index} />
+          <FlatList
+            data={carlist}
+            renderItem={renderItem}
+            keyExtractor={(item, index) => "key" + index}
+          />
         </Block>
       </ScrollView>
     );
@@ -105,8 +123,8 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => ({
-  loading: state.car.loading,
-  data: state.car.Car_Data,
+  loading: state.place.loading,
+  carlist: state.place.carlist,
 });
 
-export default connect(mapStateToProps, { CarDetail })(Carlist);
+export default connect(mapStateToProps, { carList })(Carlist);

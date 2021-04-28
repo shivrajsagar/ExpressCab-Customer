@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import { StyleSheet, Dimensions, ScrollView, FlatList, Text } from "react-native";
+import { StyleSheet, Dimensions, ScrollView } from "react-native";
 import { Block, theme } from "galio-framework";
 
-import { fetchCity } from "../redux/actions/placeAction";
-import { fetchprice } from "../redux/actions/priceaction";
+import { fetchState, fetchPrice } from "../redux/actions/placeAction";
 import { connect } from "react-redux";
 
 const { width } = Dimensions.get("screen");
@@ -15,38 +14,22 @@ import CitySearch from "../components/CitySearch";
 
 class Home extends Component {
   componentDidMount = () => {
-    this.props.fetchCity();
+    this.props.fetchState();
   };
 
   componentDidUpdate() {
-    this.props.fetchprice();
+    const { cityid } = this.props;
+    this.props.fetchPrice(cityid);
   }
 
-  renderSearch = () => {
-    const { navigation, item } = this.props;
-    return (
-      <>
-        <StateSearch item={item} navigation={navigation} />
-        <CitySearch item={item} navigation={navigation} />
-      </>
-    );
-  };
-
-  renderItem = ({ item }) => {
-    const { navigation } = this.props;
-    console.log(item);
-    return <City item={item} navigation={navigation} />;
-  };
-
   render() {
-    const { data, loading, item, navigation } = this.props;
+    const { item, navigation } = this.props;
 
     return (
       <ScrollView showsVerticalScrollIndicator={false}>
         <Block safe center style={styles.home}>
           <StateSearch item={item} navigation={navigation} />
           <CitySearch item={item} navigation={navigation} />
-          {/* {data ? <CitySearch item={item} navigation={navigation} /> : <Text>Pls Select your city to travel</Text>} */}
         </Block>
       </ScrollView>
     );
@@ -102,7 +85,10 @@ const styles = StyleSheet.create({
 });
 const mapStateToProps = (state) => ({
   loading: state.place.loading,
-  data: state.place.data,
+  cityid: state.place.cityid,
+  state: state.place.statedata,
+  city: state.place.city,
+  price: state.place.price,
 });
 
-export default connect(mapStateToProps, { fetchCity, fetchprice })(Home);
+export default connect(mapStateToProps, { fetchState, fetchPrice })(Home);
