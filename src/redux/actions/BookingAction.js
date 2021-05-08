@@ -1,11 +1,17 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { BOOKING, LOADING, BOOKING_FAILED, BOOKING_SUCCESS, BOOKING_ERROR } from "./types";
+import {
+  BOOKING,
+  LOADING,
+  BOOKING_FAILED,
+  BOOKING_SUCCESS,
+  BOOKING_ERROR,
+} from "./types";
 
 import axios from "axios";
 
 export const BookRide = () => async (dispatch) => {
   const customer_id = await AsyncStorage.getItem("customer_id");
-  //  console.log(customer_id);
+  console.log(customer_id);
 
   const myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
@@ -29,7 +35,10 @@ export const BookRide = () => async (dispatch) => {
     redirect: "follow",
   };
 
-  fetch("https://www.expresscab.in/customer-api/booking/bookinginsert.php", requestOptions)
+  fetch(
+    "https://www.expresscab.in/customer-api/booking/bookinginsert.php",
+    requestOptions
+  )
     .then((response) => response.json())
     .then((result) => [
       //dispatch({ type: SAVE_BID, payload: result.message }),

@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Platform, Dimensions } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import {
+  StyleSheet,
+  Platform,
+  Dimensions,
+  TouchableOpacity,
+} from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
 
 import { Block, Icon, Input, Text } from "galio-framework";
@@ -8,11 +12,18 @@ import { BookRide } from "../../redux/actions/BookingAction";
 import { connect } from "react-redux";
 
 import materialTheme from "../../constants/Theme";
-import { car_id } from "../Carlist";
-import { Component } from "react";
 const { width, height } = Dimensions.get("screen");
 
-const Booking2 = ({ navigation, route }) => {
+const Booking2 = ({ route }) => {
+  const [value, setValue] = useState({
+    pickupdate: "",
+    dropdate: "",
+    pickuptime: "",
+    droptime: "",
+    show: false,
+    mode: "date",
+  });
+
   const [pickup_address, setpickup_address] = useState("");
   const [drop_address, setdrop_address] = useState("");
   const [date, setDate] = useState(new Date());
@@ -23,27 +34,36 @@ const Booking2 = ({ navigation, route }) => {
   const [drop_date, setdrop_date] = useState("");
   const [drop_time, setdrop_time] = useState("");
 
-  const onChange = (event, selectedDate) => {
+  const onChange = (key, value) => {
     const currentDate = selectedDate || date;
     setShow(Platform.OS === "ios");
-    setDate(currentDate);
-    setpickup_date(setpickup_date);
+    setValue({ ...value, [key]: value });
   };
 
-  const showMode = (currentMode) => {
+  const showMode = () => {
+    setShow(true);
+  };
+
+  const onPress = (currentMode) => {
     setShow(true);
     setMode(currentMode);
   };
-  const pickupdate = () => {};
-  const showDatepicker = () => {
-    showMode("date");
-  };
-  const showTimepicker = () => {
-    showMode("time");
-  };
 
   const { car_name, car_id1, cityname, fromCity, fare } = route.params;
-  console.log(car_id1, car_name, cityname, fromCity, fare, pickup_address, drop_address, date, mode, show, pickup_date);
+
+  const BookingRide = () => {
+    return console.log(
+      car_id1,
+      car_name,
+      fromCity,
+      cityname,
+      fare,
+      pickup_address,
+      drop_address,
+      date,
+      pickup_date
+    );
+  };
 
   return (
     <Block safe middle style={styles.container}>
@@ -74,10 +94,16 @@ const Booking2 = ({ navigation, route }) => {
           onChangeText={(text) => setpickup_address(text)}
         />
         <Block row space="around">
-          <TouchableOpacity style={styles.input} onPress={showDatepicker}>
+          <TouchableOpacity
+            style={styles.input}
+            onPress={() => onPress("date")}
+          >
             <Text>{date.toLocaleDateString()}</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.input} onPress={showTimepicker}>
+          <TouchableOpacity
+            style={styles.input}
+            onPress={() => onPress("time")}
+          >
             <Text>{date.toLocaleTimeString()}</Text>
           </TouchableOpacity>
         </Block>
@@ -94,32 +120,44 @@ const Booking2 = ({ navigation, route }) => {
           value={drop_address}
           onChangeText={(text) => setdrop_address(text)}
         />
+        
         <Block row space="around">
-          <TouchableOpacity style={styles.input} onPress={showDatepicker}>
+          <TouchableOpacity
+            style={styles.input}
+            onPress={() => onPress("date")}
+          >
             <Text>{date.toLocaleDateString()}</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.input} onPress={showTimepicker}>
+          <TouchableOpacity
+            style={styles.input}
+            onPress={() => onPress("time")}
+          >
             <Text>{date.toLocaleTimeString()}</Text>
           </TouchableOpacity>
         </Block>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={BookingRide}>
           <Block row space="around">
             <Text bold color="white">
               Next Step
             </Text>
-            <Icon name="chevron-with-circle-right" family="Entypo" size={20} color="white" />
+            <Icon
+              name="chevron-with-circle-right"
+              family="Entypo"
+              size={20}
+              color="white"
+            />
           </Block>
         </TouchableOpacity>
-        {show ? (
+        {show && (
           <DateTimePicker
             testID="dateTimePicker"
             value={date}
             mode={mode}
             is24Hour={true}
             display="default"
-            onChange={() => onChange}
+            onChange={onChange}
           />
-        ) : null}
+        )}
       </Block>
     </Block>
   );

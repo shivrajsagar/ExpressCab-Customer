@@ -89,7 +89,14 @@ class Booking1 extends Component {
   };
 
   render() {
-    const { show, mode, date, pickup_address, drop_address, car_id } = this.state;
+    const {
+      show,
+      mode,
+      date,
+      pickup_address,
+      drop_address,
+      car_id,
+    } = this.state;
     const { onChange, showDatepicker, showTimepicker } = this;
     const { car_id1, car_name } = this.props.route;
 
@@ -156,7 +163,12 @@ class Booking1 extends Component {
               <Text bold color="white">
                 Next Step
               </Text>
-              <Icon name="chevron-with-circle-right" family="Entypo" size={20} color="white" />
+              <Icon
+                name="chevron-with-circle-right"
+                family="Entypo"
+                size={20}
+                color="white"
+              />
             </Block>
           </TouchableOpacity>
           {show ? (
